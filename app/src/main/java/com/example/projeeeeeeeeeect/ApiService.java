@@ -6,8 +6,17 @@ import retrofit2.http.POST;
 import retrofit2.http.GET;
 import java.util.List;
 
-class UserLoginRequest { String email; String password; }
-class UserLoginResponse{ String token; String message; }
+class UserLoginRequest { String email; String password;
+    public UserLoginRequest(String email, String password){
+        this.email = email;
+        this.password = password;
+    }
+}
+class UserLoginResponse{ String token; String message;
+    public UserLoginResponse(String token, String message){
+        this.token = token;
+        this.message = message;
+    }}
 
 public interface ApiService {
     @POST("api/auth/login")

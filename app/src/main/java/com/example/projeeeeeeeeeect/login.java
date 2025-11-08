@@ -8,11 +8,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+// ADD THESE IMPORTS FOR RETROFIT
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class login extends AppCompatActivity {
 
@@ -33,43 +34,74 @@ public class login extends AppCompatActivity {
         anonymousButton = findViewById(R.id.anonymousButton);
         signupLink = findViewById(R.id.signupLink);
 
-        // Handle login button click
+        // --- THIS IS THE NEW CLICK LISTENER ---
         loginButton.setOnClickListener(v -> {
+            // Get the text from the fields
+            String email = emailInput.getText().toString().trim();
+            String password = passwordInput.getText().toString();
             String role = roleSpinner.getSelectedItem().toString();
-            switch (role) {
-                case "Admin":
-                    // TODO: Uncomment once AdminDashboardActivity is created
-                    // startActivity(new Intent(this, AdminDashboardActivity.class));
-                    Toast.makeText(this, "Admin dashboard coming soon.", Toast.LENGTH_SHORT).show();
-                    break;
-                case "Counselor":
-                    // TODO: Uncomment once CounselorDashboardActivity is created
-                    startActivity(new Intent(this, CounsilorDashboard.class));
-                    break;
-                case "NGO":
-                    // TODO: Uncomment once NGODashboardActivity is created
-                    // startActivity(new Intent(this, NGODashboardActivity.class));
-                    Toast.makeText(this, "NGO dashboard coming soon.", Toast.LENGTH_SHORT).show();
-                    break;
-                default:
-                    // Only MainActivity exists for now
-                    startActivity(new Intent(this, MainActivity.class));
-                    break;
-            }
+
+            // 1. Create the request object
+            UserLoginRequest loginRequest = new UserLoginRequest(email, password);
+
+            // 2. Get the ApiService from your RetrofitClient
+            ApiService apiService = RetrofitClient.getApiService();
+
+            // 3. Make the network call
+            Call<UserLoginResponse> call = apiService.loginUser(loginRequest);
+
+            // 4. Handle the response (asynchronously)
+            call.enqueue(new Callback<UserLoginResponse>() {
+                @Override
+                public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
+                    // Check if the API call was successful (HTTP 200-299)
+                    if (response.isSuccessful() && response.body() != null) {
+                        // Login Success!
+                        // You can get data from the response, e.g., response.body().token
+                        Toast.makeText(login.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+
+                        // Now, navigate based on the selected role
+                        switch (role) {
+                            case "Admin":
+                                startActivity(new Intent(login.this, AdminDashboardActivity.class));
+                                break;
+                            case "Counselor":
+                                startActivity(new Intent(login.this, CounsilorDashboard.class));
+                                break;
+                            case "NGO":
+                                Toast.makeText(login.this, "NGO dashboard coming soon.", Toast.LENGTH_SHORT).show();
+                                break;
+                            default: // "User"
+                                startActivity(new Intent(login.this, MainActivity.class));
+                                break;
+                        }
+                        finish(); // Close the login activity
+
+                    } else {
+                        // API call was not successful (e.g., 401 Unauthorized, 404 Not Found)
+                        Toast.makeText(login.this, "Invalid email or password.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserLoginResponse> call, Throwable t) {
+                    // This happens on network errors (e.g., no internet, server is down)
+                    Toast.makeText(login.this, "Network Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
         });
 
 
-        // Anonymous login
+        // Anonymous login (no change needed)
         anonymousButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("anonymous", true);
+            intent.putExtra("isAnonymous", true); // This now matches MainActivity
             startActivity(intent);
         });
 
-        // Go to sign-up
+        // Go to sign-up (no change needed)
         signupLink.setOnClickListener(v -> {
             startActivity(new Intent(this, SignUp.class));
         });
     }
 }
-
