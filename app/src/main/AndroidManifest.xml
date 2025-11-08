@@ -16,25 +16,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PROJEEEEEEEEEECT">
         <activity
-            android:name=".AdminDashboardActivity"
+            android:name=".admin.AdminDashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminViewUsersActivity"
+            android:name=".admin.mainbtns.AdminViewUsersActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminViewReportsActivity"
+            android:name=".admin.mainbtns.AdminReportStatsActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminManageCounselorsActivity"
+            android:name=".admin.mainbtns.AdminManageCounselorsActivity"
             android:exported="false" />
         <activity
-            android:name=".PublishResource"
+            android:name=".counselor.PublishResource"
             android:exported="false" />
         <activity
-            android:name=".CounsilorViewReports"
+            android:name=".counselor.CounsilorViewReports"
             android:exported="false" />
         <activity
-            android:name=".CounsilorDashboard"
+            android:name=".counselor.CounsilorDashboard"
             android:exported="false" />
         <activity
             android:name=".Conversation"
@@ -49,13 +49,13 @@
             android:name=".Resources"
             android:exported="false" />
         <activity
-            android:name=".FileReport"
+            android:name=".user.FileReport"
             android:exported="false" />
         <activity
-            android:name=".Dashboard"
+            android:name=".user.Dashboard"
             android:exported="false" />
         <activity
-            android:name=".SignUp"
+            android:name=".user.SignUp"
             android:exported="false" />
         <activity
             android:name=".login"
