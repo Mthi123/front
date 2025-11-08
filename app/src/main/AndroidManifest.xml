@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,7 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PROJEEEEEEEEEECT">
         <activity
-            android:name=".AdminDashboard"
+            android:name=".AdminDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminViewUsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminViewReportsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminManageCounselorsActivity"
             android:exported="false" />
         <activity
             android:name=".PublishResource"
