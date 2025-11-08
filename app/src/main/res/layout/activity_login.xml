@@ -1,30 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login">
+    tools:context=".Login">
 
+    <!-- Background Image -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/back"
+        android:contentDescription="@string/background_image" />
 
+    <!-- Dark overlay for readability -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000" /> <!-- 50% black tint -->
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingTop="60dp"
+            android:paddingHorizontal="32dp"
+            android:paddingTop="80dp"
             android:paddingBottom="40dp">
 
             <!-- App logo -->
             <ImageView
                 android:id="@+id/logoImage"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 android:src="@drawable/poster"
                 android:contentDescription="@string/app_logo"
-                android:layout_marginBottom="20dp" />
+                android:padding="16dp"
+                android:layout_marginBottom="24dp" />
 
             <!-- App name -->
             <TextView
@@ -32,54 +52,56 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hu_xing"
-                android:textSize="26sp"
+                android:textSize="32sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="30dp" />
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="40dp" />
 
             <!-- Email -->
             <EditText
                 android:id="@+id/emailInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:hint="@string/username"
                 android:inputType="textEmailAddress"
-                android:padding="12dp"
-                android:backgroundTint="@color/soft_pink"
+                android:padding="16dp"
+                android:backgroundTint="@color/soft_pink_dark"
+                android:textColor="@android:color/black"
+                android:textColorHint="#CCCCCC"
                 android:layout_marginBottom="16dp" />
 
             <!-- Password -->
             <EditText
                 android:id="@+id/passwordInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:padding="12dp"
-                android:backgroundTint="@color/soft_pink"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Role selector -->
-            <Spinner
-                android:id="@+id/roleSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/user_roles"
-                android:layout_marginBottom="20dp" />
+                android:padding="16dp"
+                android:backgroundTint="@color/soft_pink_dark"
+                android:textColor="@android:color/black"
+                android:textColorHint="#CCCCCC"
+                android:layout_marginBottom="24dp" />
 
             <!-- Login button -->
             <Button
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/login" />
+                android:layout_height="56dp"
+                android:text="@string/login"
+                android:textColor="@android:color/black"
+                android:backgroundTint="@color/soft_pink"
+                android:layout_marginBottom="12dp" />
 
             <!-- Continue as Anonymous -->
             <Button
                 android:id="@+id/anonymousButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:text="@string/continue_as_anonymous"
-                android:layout_marginTop="12dp" />
+                android:backgroundTint="#88FFFFFF"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="24dp" />
 
             <!-- Sign Up link -->
             <TextView
@@ -88,8 +110,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/don_t_have_an_account_sign_up"
                 android:textColor="@android:color/holo_blue_dark"
-                android:layout_marginTop="20dp" />
+                android:textSize="18sp"
+                android:layout_marginTop="8dp" />
 
         </LinearLayout>
     </ScrollView>
+
+</RelativeLayout>
 
