@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-// ADD THESE IMPORTS FOR RETROFIT
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,7 +17,6 @@ import retrofit2.Response;
 public class login extends AppCompatActivity {
 
     EditText emailInput, passwordInput;
-    Spinner roleSpinner;
     Button loginButton, anonymousButton;
     TextView signupLink;
 
@@ -29,7 +27,6 @@ public class login extends AppCompatActivity {
 
         emailInput = findViewById(R.id.emailInput);
         passwordInput = findViewById(R.id.passwordInput);
-        roleSpinner = findViewById(R.id.roleSpinner);
         loginButton = findViewById(R.id.loginButton);
         anonymousButton = findViewById(R.id.anonymousButton);
         signupLink = findViewById(R.id.signupLink);
@@ -39,39 +36,38 @@ public class login extends AppCompatActivity {
             // Get the text from the fields
             String email = emailInput.getText().toString().trim();
             String password = passwordInput.getText().toString();
-            String role = roleSpinner.getSelectedItem().toString();
 
-            // 1. Create the request object
+            // 1. Create the request object (no change here)
             UserLoginRequest loginRequest = new UserLoginRequest(email, password);
 
-            // 2. Get the ApiService from your RetrofitClient
+            // 2. Get the ApiService (no change here)
             ApiService apiService = RetrofitClient.getApiService();
 
-            // 3. Make the network call
+            // 3. Make the network call (no change here)
             Call<UserLoginResponse> call = apiService.loginUser(loginRequest);
 
-            // 4. Handle the response (asynchronously)
+            // 4. Handle the response (THIS IS THE UPDATED PART)
             call.enqueue(new Callback<UserLoginResponse>() {
                 @Override
                 public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
-                    // Check if the API call was successful (HTTP 200-299)
+
                     if (response.isSuccessful() && response.body() != null) {
                         // Login Success!
-                        // You can get data from the response, e.g., response.body().token
                         Toast.makeText(login.this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
-                        // Now, navigate based on the selected role
-                        switch (role) {
-                            case "Admin":
+                        // Get the roleId from the response
+                        int roleId = response.body().getRoleId();
+
+                        // 3=Admin, 2=Counselor, 1=User (or default)
+                        switch (roleId) {
+                            case 3:
                                 startActivity(new Intent(login.this, AdminDashboardActivity.class));
                                 break;
-                            case "Counselor":
+                            case 2: // Assuming 2 is for Counselor
                                 startActivity(new Intent(login.this, CounsilorDashboard.class));
                                 break;
-                            case "NGO":
-                                Toast.makeText(login.this, "NGO dashboard coming soon.", Toast.LENGTH_SHORT).show();
-                                break;
-                            default: // "User"
+                            case 1: // Assuming 1 is for User
+                            default:
                                 startActivity(new Intent(login.this, MainActivity.class));
                                 break;
                         }
@@ -85,7 +81,7 @@ public class login extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<UserLoginResponse> call, Throwable t) {
-                    // This happens on network errors (e.g., no internet, server is down)
+                    // This happens on network errors
                     Toast.makeText(login.this, "Network Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });

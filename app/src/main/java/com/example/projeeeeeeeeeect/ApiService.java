@@ -12,11 +12,19 @@ class UserLoginRequest { String email; String password;
         this.password = password;
     }
 }
-class UserLoginResponse{ String token; String message;
-    public UserLoginResponse(String token, String message){
+class UserLoginResponse{ String token; String message; int role_id;
+    public UserLoginResponse(String token, String message, int role_id){
         this.token = token;
         this.message = message;
-    }}
+        this.role_id = role_id;
+    }
+    public int getRoleId(){
+        return role_id;
+    }
+    public String getToken() {
+        return token;
+    }
+}
 
 public interface ApiService {
     @POST("api/auth/login")
