@@ -56,7 +56,7 @@ public class login extends AppCompatActivity {
                         Toast.makeText(login.this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
                         // Get the roleId from the response
-                        int roleId = response.body().getRoleId();
+                        int roleId = response.body().getUser().role_id;
 
                         // 3=Admin, 2=Counselor, 1=User (or default)
                         switch (roleId) {

@@ -12,17 +12,23 @@ class UserLoginRequest { String email; String password;
         this.password = password;
     }
 }
-class UserLoginResponse{ String token; String message; int role_id;
+class UserLoginResponse{ String token; String message; User user;
     public UserLoginResponse(String token, String message, int role_id){
         this.token = token;
         this.message = message;
-        this.role_id = role_id;
     }
-    public int getRoleId(){
-        return role_id;
+    public User getUser(){
+        return user;
     }
     public String getToken() {
         return token;
+    }
+}
+
+class User {
+    int role_id;
+    public int getRoleId(){
+        return role_id;
     }
 }
 
