@@ -1,10 +1,16 @@
-package com.example.projeeeeeeeeeect;
+package com.example.projeeeeeeeeeect.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.projeeeeeeeeeect.R;
+import com.example.projeeeeeeeeeect.Resources;
+import com.example.projeeeeeeeeeect.admin.mainbtns.AdminManageCounselorsActivity;
+import com.example.projeeeeeeeeeect.admin.mainbtns.AdminReportStatsActivity;
+import com.example.projeeeeeeeeeect.admin.mainbtns.AdminViewUsersActivity;
 
 public class AdminDashboardActivity extends AppCompatActivity {
 
@@ -29,7 +35,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
         viewReportsBtn.setOnClickListener(v -> {
             // Open activity to view all reports
-            Intent intent = new Intent(this, AdminViewReportsActivity.class);
+            Intent intent = new Intent(this, AdminReportStatsActivity.class);
             startActivity(intent);
         });
 

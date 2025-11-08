@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
-    tools:context=".Dashboard">
+    tools:context=".user.Dashboard">
 
         <TextView
             android:id="@+id/welcomeText"
