@@ -1,4 +1,4 @@
 package com.example.projeeeeeeeeeect;
 
-public class AdminViewReportsActivity {
+public class AdminViewReportsActivity extends AdminDashboardActivity{
 }

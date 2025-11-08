@@ -1,4 +1,4 @@
 package com.example.projeeeeeeeeeect;
 
-public class AdminManageCounselorsActivity {
+public class AdminManageCounselorsActivity extends AdminDashboardActivity {
 }
