@@ -1,4 +1,4 @@
-package com.example.projeeeeeeeeeect;
+package com.example.projeeeeeeeeeect.counselor;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.projeeeeeeeeeect.R;
 
 public class PublishResource extends AppCompatActivity {
 

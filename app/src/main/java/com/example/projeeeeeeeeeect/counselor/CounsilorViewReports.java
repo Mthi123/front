@@ -1,4 +1,4 @@
-package com.example.projeeeeeeeeeect;
+package com.example.projeeeeeeeeeect.counselor;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -6,11 +6,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.projeeeeeeeeeect.R;
 
 import java.util.ArrayList;
 import java.util.List;

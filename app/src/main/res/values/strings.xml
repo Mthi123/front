@@ -40,6 +40,7 @@
     <string name="title">Title</string>
     <string name="admin_dashboard">Admin Dashboard</string>
     <string name="view_users">View Users</string>
+    <string name="report_statistics">Report Statistics</string>
     <string name="view_reports">View Reports</string>
     <string name="manage_counselors">Manage Counselors</string>
     <string name="view_resources">View Resources</string>
