@@ -9,9 +9,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.projeeeeeeeeeect.Models.UserLoginRequest;
+import com.example.projeeeeeeeeeect.Models.UserLoginResponse;
 import com.example.projeeeeeeeeeect.admin.AdminDashboardActivity;
 import com.example.projeeeeeeeeeect.counselor.CounsilorDashboard;
+import com.example.projeeeeeeeeeect.network.ApiService;
+import com.example.projeeeeeeeeeect.network.RetrofitClient;
 import com.example.projeeeeeeeeeect.user.SignUp;
+import com.example.projeeeeeeeeeect.auth.SessionManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,11 +27,13 @@ public class login extends AppCompatActivity {
     EditText emailInput, passwordInput;
     Button loginButton, anonymousButton;
     TextView signupLink;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sessionManager = new SessionManager(this);
 
         emailInput = findViewById(R.id.emailInput);
         passwordInput = findViewById(R.id.passwordInput);
@@ -36,30 +43,31 @@ public class login extends AppCompatActivity {
 
         // --- THIS IS THE NEW CLICK LISTENER ---
         loginButton.setOnClickListener(v -> {
-            // Get the text from the fields
             String email = emailInput.getText().toString().trim();
             String password = passwordInput.getText().toString();
 
-            // 1. Create the request object (no change here)
             UserLoginRequest loginRequest = new UserLoginRequest(email, password);
 
-            // 2. Get the ApiService (no change here)
-            ApiService apiService = RetrofitClient.getApiService();
-
-            // 3. Make the network call (no change here)
+            // Pass the context (this) to getApiService
+            ApiService apiService = RetrofitClient.getApiService(this);
             Call<UserLoginResponse> call = apiService.loginUser(loginRequest);
 
-            // 4. Handle the response (THIS IS THE UPDATED PART)
             call.enqueue(new Callback<UserLoginResponse>() {
                 @Override
                 public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
 
                     if (response.isSuccessful() && response.body() != null) {
-                        // Login Success!
                         Toast.makeText(login.this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
-                        // Get the roleId from the response
-                        int roleId = response.body().getUser().role_id;
+                        // --- SAVE THE TOKEN ---
+                        // Get token from response and save it
+                        String token = response.body().getToken();
+                        if (token != null) {
+                            sessionManager.saveAuthToken(token);
+                        }
+                        // --- END SAVE TOKEN ---
+
+                        int roleId = response.body().getUser().role_id;;
 
                         // 3=Admin, 2=Counselor, 1=User (or default)
                         switch (roleId) {
