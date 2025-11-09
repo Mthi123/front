@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".counselor.PublishArticle">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/back"
+        android:contentDescription="@string/background_image" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/publish_article"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/titleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/title"
+                android:textColor="@android:color/white"
+                android:textColorHint="#CCCCCC"
+                android:backgroundTint="@color/soft_pink"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/contentEditText"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:hint="@string/content"
+                android:gravity="top"
+                android:textColor="@android:color/white"
+                android:textColorHint="#CCCCCC"
+                android:backgroundTint="@color/soft_pink"
+                android:layout_marginBottom="16dp"
+                android:inputType="textMultiLine"/>
+
+            <Button
+                android:id="@+id/publishBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/publish"
+                android:backgroundTint="@color/soft_pink_dark"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

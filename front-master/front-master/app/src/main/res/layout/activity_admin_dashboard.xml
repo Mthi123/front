@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".admin.AdminDashboardActivity">
+
+        <!-- 1. Background Image -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/back"
+            android:contentDescription="@string/background_image" />
+
+        <!-- 2. Dark Overlay (50% Black) for Readability -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80000000" />
+
+        <!-- 3. Scrollable Content Container (Centers the buttons) -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:gravity="center">
+
+
+                        <TextView
+                            android:id="@+id/titleText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/admin_dashboard"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white"
+                            android:layout_marginBottom="32dp" />
+
+                        <Button
+                            android:id="@+id/viewUsersBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/view_users"
+                            android:backgroundTint="@color/soft_pink"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="16dp" />
+
+                        <Button
+                            android:id="@+id/viewReportsBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/report_statistics"
+                            android:backgroundTint="@color/soft_pink"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="16dp" />
+
+                        <Button
+                            android:id="@+id/manageCounselorsBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/manage_counselors"
+                            android:backgroundTint="@color/soft_pink"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="16dp" />
+
+                        <Button
+                            android:id="@+id/viewResourcesBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/view_articles"
+                            android:backgroundTint="@color/soft_pink"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="16dp" />
+
+                </LinearLayout>
+        </ScrollView>
+</RelativeLayout>
