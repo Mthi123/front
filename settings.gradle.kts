@@ -1,24 +1,24 @@
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
-        mavenCentral()
         gradlePluginPortal()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
         google()
         mavenCentral()
     }
+    plugins {
+        // Optional: declare plugin versions here if not using TOML
+    }
 }
 
-rootProject.name = "PROJEEEEEEEEEECT"
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://repo.sendbird.com") }
+    }
+    versionCatalogs {
+
+    }
+}
+
+rootProject.name = "PRO.EEEEEEEEEEEEET"
 include(":app")
- 

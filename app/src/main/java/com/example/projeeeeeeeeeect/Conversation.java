@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+//import com.sendbird.android.channel.GroupChannel;
+//import com.sendbird.android.handler.GroupChannelHandler;
+//import com.sendbird.android.message.BaseMessage;
 
 import com.example.projeeeeeeeeeect.Adapters.ChatAdapter;
 import com.example.projeeeeeeeeeect.Models.Message;
@@ -21,8 +24,6 @@ import com.example.projeeeeeeeeeect.Models.ChatStartResponse;
 import com.example.projeeeeeeeeeect.Models.SendMessageRequest;
 import com.example.projeeeeeeeeeect.Models.SendMessageResponse;
 import com.example.projeeeeeeeeeect.Models.SendBirdMessage; // Import this new model
-import com.example.projeeeeeeeeeect.network.ApiService;
-import com.example.projeeeeeeeeeect.network.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;

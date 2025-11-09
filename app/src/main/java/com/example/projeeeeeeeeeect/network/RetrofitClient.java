@@ -1,11 +1,16 @@
-package com.example.projeeeeeeeeeect.network;
+package com.example.projeeeeeeeeeect.network; // <-- 1. This was the first error
 
-import android.content.Context; // Import Context
+import android.content.Context;
+import com.example.projeeeeeeeeeect.auth.SessionManager;
 
-import com.example.projeeeeeeeeeect.auth.SessionManager; // Import SessionManager
+// --- Add these missing imports ---
+import java.io.IOException;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+// --- End missing imports ---
 
-import okhttp3.OkHttpClient; // Import OkHttpClient
-import okhttp3.Request; // Import Request
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -29,22 +34,26 @@ public class RetrofitClient {
             // Create an OkHttpClient to add the auth header
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
-            httpClient.addInterceptor(chain -> {
-                // Get the token from our SessionManager
-                String token = sessionManager.getAuthToken();
-                Request original = chain.request();
+            // Rewritten as a full Interceptor class to be clear
+            httpClient.addInterceptor(new Interceptor() {
+                @Override
+                public Response intercept(Chain chain) throws IOException {
+                    // Get the token from our SessionManager
+                    String token = sessionManager.getAuthToken();
+                    Request original = chain.request();
 
-                // If token exists, add it to the header
-                if (token != null) {
-                    Request.Builder requestBuilder = original.newBuilder()
-                            .header("Authorization", "Bearer " + token) // Standard auth header
-                            .method(original.method(), original.body());
-                    Request request = requestBuilder.build();
-                    return chain.proceed(request);
+                    // If token exists, add it to the header
+                    if (token != null) {
+                        Request.Builder requestBuilder = original.newBuilder()
+                                .header("Authorization", "Bearer " + token) // Standard auth header
+                                .method(original.method(), original.body());
+                        Request request = requestBuilder.build();
+                        return chain.proceed(request);
+                    }
+
+                    // If no token, proceed with the original request
+                    return chain.proceed(original);
                 }
-
-                // If no token, proceed with the original request
-                return chain.proceed(original);
             });
 
             OkHttpClient client = httpClient.build();
@@ -56,6 +65,8 @@ public class RetrofitClient {
                     .client(client) // Set the custom client
                     .build();
         }
+
+        // <-- 2. This 'return' was outside the method! I moved it here.
         return retrofit.create(ApiService.class);
     }
 }
